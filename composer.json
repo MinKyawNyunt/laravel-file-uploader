@@ -1,0 +1,17 @@
+{
+    "name": "mkn/laravel-file-uploader",
+    "description": "Ready Made File Upload Function",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "minkyawnyunt",
+            "email": "mgminkyawnyunt@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MKN\\LaravelFileUploader\\": "src/"
+        }
+    }
+}
