@@ -10,7 +10,7 @@
             $this->loadMigrationsFrom(__DIR__.'/database/migrations');
             $this->publishes([
                 __DIR__.'/database/migrations' => base_path('database/migrations'),
-                __DIR__.'FileUpload.php' => base_path('app'),
+                __DIR__.'/FileUpload.php' => base_path('app/FileUpload.php'),
             ]);
         }
         public function register()
