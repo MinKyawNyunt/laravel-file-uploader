@@ -13,5 +13,12 @@
         "psr-4": {
             "MKN\\LaravelFileUploader\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MKN\\LaravelFileUploader\\FileUploaderServiceProvider"
+            ]
+        }
     }
 }

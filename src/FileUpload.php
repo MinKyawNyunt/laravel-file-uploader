@@ -17,35 +17,6 @@ class FileUpload extends Model
         'is_encrypted',
     ];
 
-    public function deleteSingleFile()
-    {
-        $full_name = $this->getFullFileName();
-        Storage::delete($full_name);
-        return;
-    }
-
-    // public function showImage()
-    // {
-    //     return "data:image/jpg;base64,".base64_encode($this->decryptFile());
-    // }
-
-    public function showFile()
-    {
-        $Content = $this->decryptFile();
-
-        return Response::make($Content, 200, [
-          'Content-Type'        => $this->content_type,
-          'Content-Disposition' => 'inline;'
-        ]);
-    }
-
-    public function downloadFile($fileName)
-    {
-        return response()->streamDownload(function () {
-            echo $this->decryptFile();
-        }, $fileName);
-    }
-
     public static function single($file, $directory, $encrypt = 1)
     {
         $fileContent = $file->get();
@@ -72,24 +43,52 @@ class FileUpload extends Model
         ])->id;
     }
 
-    private function getFullFileName()
-    {
-        return $this->file_directory.'/'.$this->file_name.'.'.$this->file_extension;
-    }
-
-    public static function multiple($files, $directory)
+    public static function multiple($files, $directory, $encrypt = 1)
     {
         $file_id_arr = array();
         foreach ((array)$files as $key => $file) {
-            $file_id_arr[$key] = self::uploadSingleFile($file, $directory);
+            $file_id_arr[$key] = self::uploadSingleFile($file, $directory, $encrypt);
         }
         return $file_id_arr;
+    }
+
+    public function deleteFile()
+    {
+        $full_name = $this->getFullFileName();
+        Storage::delete($full_name);
+        return;
+    }
+
+    public function showFile()
+    {
+        $Content = $this->decryptFile();
+
+        return Response::make($Content, 200, [
+          'Content-Type'        => $this->content_type,
+          'Content-Disposition' => 'inline;'
+        ]);
+    }
+
+    public function downloadFile($fileName)
+    {
+        return response()->streamDownload(function () {
+            echo $this->decryptFile();
+        }, $fileName);
     }
 
     public function decryptFile()
     {
         $full_file_name = $this->getFullFileName();
         $Content = Storage::get($full_file_name);
-        return decrypt($Content);
+
+        if ($this->is_encrypted) {
+            return decrypt($Content);
+        }
+        return $Content;
+    }
+
+    private function getFullFileName()
+    {
+        return $this->file_directory.'/'.$this->file_name.'.'.$this->file_extension;
     }
 }
