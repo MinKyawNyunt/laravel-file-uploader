@@ -1,6 +1,6 @@
 <?php
 
-namespace mkn\LaravelFileUploader\models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
