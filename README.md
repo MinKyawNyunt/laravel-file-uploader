@@ -1,5 +1,5 @@
 # Laravel File Uploader
-Ready Made File model and table including encryption.
+Ready Made File model and table including encryption and 100% editable.
 
 ## Installation
 
@@ -21,10 +21,6 @@ $file = FilUpload::findOrFail(1);
 $file->deleteFile(); //to delete file
 $file->showFile(); //to show file
 $file->downloadFile(); //to download file
-
-//All code can edit in App/FileUpload;
 ```
 
-## Real World Example
-
-To Be continue
+** All code can edit in App/FileUpload **
