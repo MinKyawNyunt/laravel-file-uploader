@@ -19,6 +19,9 @@ class FileUpload extends Model
 
     public static function single($file, $directory, $encrypt = 1)
     {
+        if (!$file) {
+            return null;
+        }
         $fileContent = $file->get();
         $original_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $file_extension = $file->extension();
@@ -47,7 +50,7 @@ class FileUpload extends Model
     {
         $file_id_arr = array();
         foreach ((array)$files as $key => $file) {
-            $file_id_arr[$key] = self::uploadSingleFile($file, $directory, $encrypt);
+            $file_id_arr[$key] = self::single($file, $directory, $encrypt);
         }
         return $file_id_arr;
     }
