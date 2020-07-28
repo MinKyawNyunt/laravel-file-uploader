@@ -23,4 +23,4 @@ $file->showFile(); //to show file
 $file->downloadFile(); //to download file
 ```
 
-** All code can edit in App/FileUpload **
+**All code can edit in App/FileUpload**
